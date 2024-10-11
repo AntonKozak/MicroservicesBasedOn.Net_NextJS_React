@@ -5,3 +5,5 @@ How to build a microservices based app using .Net, NextJS, IdentityServer, Rabbi
 dotnet new sln
 dotnet new webapi -o src/AuctionService -controllers
 dotnet sln add .\src\AuctionService\
+add packages NugetGallery
+dotnet ef migrations add "InitialCreate" -o Data/Migrations
