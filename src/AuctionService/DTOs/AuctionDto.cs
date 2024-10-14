@@ -9,6 +9,7 @@ public class AuctionDto
     public int SoldAmound { get; set; }
     public int CurrentHightBid { get; set; }
     public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
     public DateTime AuctionEnd { get; set; }
     public string Status { get; set; }
     public string Make { get; set; }
