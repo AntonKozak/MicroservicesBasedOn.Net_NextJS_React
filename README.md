@@ -23,8 +23,17 @@ Microsoft.Extensions.Http.Polly \
 The HttpClient factory is a pattern for configuring and retrieving named HttpClients in a composable way. \
 MassTransit.RabbitMQ \
 MassTransit RabbitMQ transport support; MassTransit provides a developer-focused, modern platform for creating distributed applications without complexity.
+Microsoft.AspNetCore.Authentication.JwtBearer
 
 SSO \
 dotnet new install Duende.IdentityServer.Templates \
 dotnet new isaspid -o src/IdentityService \
 dotnet sln add .\src\IdentityService
+
+Gateway \
+dotnet new web -o src/GatewayService \
+dotnet sln add .\src\GatewayService
+
+Yarp.ReverseProxy https://microsoft.github.io/reverse-proxy/articles/authn-authz.html \
+Reverse proxy toolkit for building fast proxy servers in .NET using the infrastructure from ASP.NET and .NET \
+Microsoft.AspNetCore.Authentication.JwtBearer \
