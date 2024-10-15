@@ -1,6 +1,7 @@
 {
   "scripts": {
     "auction": "cd src && cd auctionservice && dotnet watch",
-    "search": "cd src && cd searchservice && dotnet watch"
+    "search": "cd src && cd searchservice && dotnet watch",
+    "identity": "cd src && cd identityservice && dotnet watch"
   }
 }

@@ -6,6 +6,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Contracts;
 using MassTransit;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -49,6 +50,7 @@ public class AuctionsController : BaseController
         return _mapper.Map<AuctionDto>(auction);
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult<AuctionDto>> CreateAuction(CreateAuctionDto createAuctionDto)
     {
@@ -56,7 +58,7 @@ public class AuctionsController : BaseController
 
         //Cliem Princeples for User seller
 
-        auction.Seller = "UserTestClaimPrinciples";
+        auction.Seller = User.Identity.Name;
 
         _context.Auctions.Add(auction);
 
@@ -71,12 +73,16 @@ public class AuctionsController : BaseController
         return CreatedAtAction(nameof(GetAuctionById), new { id = auction.Id }, newAuction);
     }
 
+    [Authorize]
     [HttpPut("{id}")]
     public async Task<ActionResult> UpdateAuction(Guid id, UpdateAuctionDto updateAuctionDto)
     {
         var auction = await _context.Auctions.Include(x => x.Item).FirstOrDefaultAsync(x => x.Id == id);
 
         if (auction == null) return NotFound();
+
+        if (auction.Seller != User.Identity.Name) return Forbid();
+
 
         auction.Item.Make = updateAuctionDto.Make ?? auction.Item.Make;
         auction.Item.Model = updateAuctionDto.Model ?? auction.Item.Model;
@@ -93,6 +99,7 @@ public class AuctionsController : BaseController
         return BadRequest();
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteAuction(Guid id)
     {
@@ -101,6 +108,8 @@ public class AuctionsController : BaseController
         if (auction == null) return NotFound();
 
         _context.Auctions.Remove(auction);
+
+        if (auction.Seller != User.Identity.Name) return Forbid();
 
         await _publishEndpoint.Publish<AuctionDeleted>(new { Id = auction.Id.ToString() });
 
