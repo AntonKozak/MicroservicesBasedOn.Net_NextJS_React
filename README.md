@@ -41,3 +41,5 @@ Microsoft.AspNetCore.Authentication.JwtBearer \
 Dockerfile has been writen and now\
 docker build -f src/auctionService/Dockerfile -t testing123 .
 docker run testing123 \
+docker compose build auction-svc \
+docker compose up -d \
