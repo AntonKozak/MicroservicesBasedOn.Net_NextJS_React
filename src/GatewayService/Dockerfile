@@ -16,14 +16,12 @@ COPY src/GatewayService/GatewayService.csproj src/GatewayService/GatewayService.
 RUN dotnet restore MicroservicesBasedOn.Net_NextJS_React.sln
 
 # Copy the app folders over
-COPY src/SearchService src/SearchService
-# Dependencies for the project
-COPY src/Contracts src/Contracts
-WORKDIR /app/src/SearchService
+COPY src/GatewayService src/GatewayService
+WORKDIR /app/src/GatewayService
 RUN dotnet publish -c Release -o /app/src/out
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/src/out .
-ENTRYPOINT ["dotnet", "SearchService.dll"]
+ENTRYPOINT ["dotnet", "GatewayService.dll"]
