@@ -37,3 +37,7 @@ dotnet sln add .\src\GatewayService
 Yarp.ReverseProxy https://microsoft.github.io/reverse-proxy/articles/authn-authz.html \
 Reverse proxy toolkit for building fast proxy servers in .NET using the infrastructure from ASP.NET and .NET \
 Microsoft.AspNetCore.Authentication.JwtBearer \
+
+Dockerfile has been writen and now\
+docker build -f src/auctionService/Dockerfile -t testing123 .
+docker run testing123 \
