@@ -1,3 +1,9 @@
+# How to start the project
+
+1. Clone the repository
+2. Run `docker-compose up -d` to start the services
+3. Run `npm run web` to start the web app
+
 # MicroservicesBasedOn.Net_NextJS_React
 
 How to build a microservices based app using .Net, NextJS, IdentityServer, RabbitMQ running on Docker and Kubernetes
