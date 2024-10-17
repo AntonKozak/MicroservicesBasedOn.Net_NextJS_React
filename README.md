@@ -58,4 +58,7 @@ rfc \
 npx create-next-app@latest \
 npm install react-icons \
 npm install react-countdown \
-npm i flowbite-react - UI Component Library \
+npm i flowbite-react - UI Component Library
+
+State management solution Zustand https://zustand-demo.pmnd.rs \
+npm install zustand query-string \

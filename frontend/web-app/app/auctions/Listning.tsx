@@ -1,30 +1,44 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import AuctionCard from './AuctionCard';
-import { Auction, PageResult } from '@/types';
-
-async function getData(): Promise<PageResult<Auction>> {
-  const res = await fetch('http://localhost:6001/search?pageSize=10');
-
-  if (!res.ok) throw new Error('Failed to fetch data');
-
-  const dataFromSearch = await res.json();
-  return dataFromSearch;
-}
+import { Auction } from '@/types';
+import AppPagination from '../components/AppPagination';
+import { getData } from '../actions/auctionActions';
+import Filters from './Filters';
 
 // Main Listning component
-export default async function Listning() {
-  const data = await getData();
+export default function Listning() {
+  const [auctions, setAuction] = useState<Auction[]>([]);
+  const [pageCount, setPageCount] = useState(0);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [pageSize, setPageSize] = useState(4);
 
-  if (!data || !data.results) {
-    return <div>No results found</div>;
-  }
+  useEffect(() => {
+    getData(pageNumber, pageSize).then((data) => {
+      setAuction(data.results);
+      setPageCount(data.pageCount);
+    });
+  }, [pageNumber, pageSize]);
+
+  if (auctions.length === 0) return <h3>Loading...</h3>;
 
   return (
-    <div className='grid grid-cols-4 grap-6'>
-      {data.results.map((auction: Auction) => (
-        <AuctionCard auction={auction} key={auction.id} />
-      ))}
-    </div>
+    <>
+      <Filters pageSize={pageSize} setPageSize={setPageSize} />
+
+      <div className='grid grid-cols-4 grap-6'>
+        {auctions.map((auction: Auction) => (
+          <AuctionCard auction={auction} key={auction.id} />
+        ))}
+      </div>
+      <div className='flex justify-center mt-4'>
+        <AppPagination
+          pageChange={setPageNumber}
+          currentPage={pageNumber}
+          pageCount={pageCount}
+        />
+      </div>
+    </>
   );
 }
