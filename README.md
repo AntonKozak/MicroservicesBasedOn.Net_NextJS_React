@@ -48,4 +48,14 @@ Dockerfile has been writen and now\
 docker build -f src/auctionService/Dockerfile -t testing123 .
 docker run testing123 \
 docker compose build auction-svc \
-docker compose up -d \
+docker compose down \
+docker compose up -d
+
+## NextJS and React
+
+rfc \
+
+npx create-next-app@latest \
+npm install react-icons \
+npm install react-countdown \
+npm i flowbite-react - UI Component Library \
