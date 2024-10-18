@@ -9,6 +9,7 @@ import Filters from './Filters';
 import { useParamsStore } from '../hooks/useParamsStore';
 import { useShallow } from 'zustand/react/shallow';
 import qs from 'query-string';
+import EmptyFilter from '../components/EmptyFilter';
 
 // Main Listning component
 export default function Listning() {
@@ -18,6 +19,8 @@ export default function Listning() {
       pageNumber: state.pageNumber,
       pageSize: state.pageSize,
       searchTerm: state.searchTerm,
+      orderBy: state.orderBy,
+      filterBy: state.filterBy,
     }))
   );
   const setPrams = useParamsStore((state) => state.setParams);
@@ -38,19 +41,24 @@ export default function Listning() {
   return (
     <>
       <Filters />
-
-      <div className='grid grid-cols-4 grap-6'>
-        {data.results.map((auction: Auction) => (
-          <AuctionCard auction={auction} key={auction.id} />
-        ))}
-      </div>
-      <div className='flex justify-center mt-4'>
-        <AppPagination
-          pageChange={setPageNumber}
-          currentPage={params.pageNumber}
-          pageCount={data.pageCount}
-        />
-      </div>
+      {data.totalCount === 0 ? (
+        <EmptyFilter showReset />
+      ) : (
+        <>
+          <div className='grid grid-cols-4 grap-6'>
+            {data.results.map((auction: Auction) => (
+              <AuctionCard auction={auction} key={auction.id} />
+            ))}
+          </div>
+          <div className='flex justify-center mt-4'>
+            <AppPagination
+              pageChange={setPageNumber}
+              currentPage={params.pageNumber}
+              pageCount={data.pageCount}
+            />
+          </div>
+        </>
+      )}
     </>
   );
 }

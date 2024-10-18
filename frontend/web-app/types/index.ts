@@ -2,6 +2,7 @@ export type PageResult<T> = {
   results: T[];
   pageCount: number;
   pageSize: number;
+  totalCount: number;
 };
 
 export type Auction = {
