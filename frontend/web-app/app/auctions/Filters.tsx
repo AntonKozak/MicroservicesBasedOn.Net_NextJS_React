@@ -99,7 +99,7 @@ export default function Filters() {
               key={i}
               onClick={() => setParams({ pageSize: value })}
               color={`${pageSize === value ? 'red' : 'grey'}`}
-              className='text-blue-600 focus:ring-1'
+              className='text-blue-600 focus:ring-1 bg-slate-800'
             >
               {value}
             </Button>
