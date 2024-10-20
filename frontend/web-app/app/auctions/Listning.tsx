@@ -21,6 +21,8 @@ export default function Listning() {
       searchTerm: state.searchTerm,
       orderBy: state.orderBy,
       filterBy: state.filterBy,
+      seller: state.seller,
+      winner: state.winner,
     }))
   );
   const setPrams = useParamsStore((state) => state.setParams);

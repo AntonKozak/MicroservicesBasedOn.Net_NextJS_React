@@ -5,8 +5,8 @@ import Image from 'next/image';
 
 type Props = {
   imageUrl: string;
-  make: string;
-  model: string;
+  make?: string;
+  model?: string;
 };
 
 export default function CarImage({ imageUrl, make, model }: Props) {

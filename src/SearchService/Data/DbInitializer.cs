@@ -28,8 +28,6 @@ public class DbInitializer
         var httpClient = scope.ServiceProvider.GetRequiredService<AuctionServiceHttpClient>();
         var items = await httpClient.GetItemForSearchDb();
 
-        Console.WriteLine("Items from AuctionService: " + JsonSerializer.Serialize(items) + " Count: " + items.Count);
-
         if (items.Count > 0) await DB.SaveAsync(items);
     }
 }

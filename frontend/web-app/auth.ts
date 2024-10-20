@@ -24,8 +24,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
 
     async jwt({ token, profile, account }) {
-      console.log('jwt from auth.tsx', { token, profile });
-
       if (account && account.access_token) {
         token.accessToken = account.access_token;
       }
