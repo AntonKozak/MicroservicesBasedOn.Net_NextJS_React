@@ -79,9 +79,12 @@ npm install zustand query-string \
 
 dotnet new webapi -o src/BiddingService -controllers \
 dotnet sln add .\src\BiddingService\ \
+ cd .\src\BiddingService \
+ dotnet add reference ../../src/Contracts
 
 [NugetGallery](https://www.nuget.org/)
 
 - **MongoDB.Entities** — A data access library for MongoDB with an elegant API, LINQ support, and built-in entity relationship management.
 - **Microsoft.AspNetCore.Authentication.JwtBearer** — ASP.NET Core middleware that enables an application to receive an OpenID Connect bearer token. This package was built from the source code at [ASP.NET Core GitHub Repository](https://github.com/dotnet/aspnetcore/tree/c2a442982e736e17ae6bcadbfd8ccba278ee1be6).
 - **MassTransit.RabbitMQ** — MassTransit RabbitMQ transport support. MassTransit provides a developer-focused, modern platform for creating distributed applications without complexity.
+- **Automapper** — A convention-based object-object mapper. 100% organic and gluten-free.
