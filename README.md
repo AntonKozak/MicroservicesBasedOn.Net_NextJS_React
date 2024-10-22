@@ -29,7 +29,8 @@ Microsoft.Extensions.Http.Polly \
 The HttpClient factory is a pattern for configuring and retrieving named HttpClients in a composable way. \
 MassTransit.RabbitMQ \
 MassTransit RabbitMQ transport support; MassTransit provides a developer-focused, modern platform for creating distributed applications without complexity.
-Microsoft.AspNetCore.Authentication.JwtBearer
+Microsoft.AspNetCore.Authentication.JwtBearer \
+Grpc.AspNetCore
 
 SSO \
 dotnet new install Duende.IdentityServer.Templates \
@@ -88,3 +89,6 @@ dotnet sln add .\src\BiddingService\ \
 - **Microsoft.AspNetCore.Authentication.JwtBearer** — ASP.NET Core middleware that enables an application to receive an OpenID Connect bearer token. This package was built from the source code at [ASP.NET Core GitHub Repository](https://github.com/dotnet/aspnetcore/tree/c2a442982e736e17ae6bcadbfd8ccba278ee1be6).
 - **MassTransit.RabbitMQ** — MassTransit RabbitMQ transport support. MassTransit provides a developer-focused, modern platform for creating distributed applications without complexity.
 - **Automapper** — A convention-based object-object mapper. 100% organic and gluten-free.
+- **Google.Protobuf** — Protocol Buffers is a method of serializing structured data. It is useful in developing programs to communicate with each other over a wire or for storing data.
+- **Grpc.Tools** — gRPC and Protocol Buffers compiler for managed C# and native C++ projects. Add this package to a project that contains .proto files to be compiled to code.
+- **Grpc.Net.Client** — gRPC C# client library.

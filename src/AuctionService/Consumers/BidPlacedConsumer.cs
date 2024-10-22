@@ -14,7 +14,7 @@ public class BidPlacedConsumer : IConsumer<BidPlaced>
     }
     public async Task Consume(ConsumeContext<BidPlaced> context)
     {
-        Console.WriteLine("BidPlacedConsumer - BidPlacedConsumer - BidPlacedConsumer");
+        Console.WriteLine("BidPlacedConsumer - BidPlacedConsumer - BidPlacedConsumer Received Bid Event");
 
         var auction = await _dbContext.Auctions.FindAsync(Guid.Parse(context.Message.AuctionId));
 

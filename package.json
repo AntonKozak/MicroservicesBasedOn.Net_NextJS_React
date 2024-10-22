@@ -4,6 +4,7 @@
     "search": "cd src && cd searchservice && dotnet watch",
     "identity": "cd src && cd identityservice && dotnet watch",
     "gateway": "cd src && cd gatewayservice && dotnet watch",
+    "bid": "cd src/biddingService && dotnet watch",
     "web": "cd frontend/web-app && npm run dev"
   }
 }
