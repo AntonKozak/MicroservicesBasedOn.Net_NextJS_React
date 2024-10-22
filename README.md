@@ -86,9 +86,19 @@ dotnet sln add .\src\BiddingService\ \
 [NugetGallery](https://www.nuget.org/)
 
 - **MongoDB.Entities** — A data access library for MongoDB with an elegant API, LINQ support, and built-in entity relationship management.
-- **Microsoft.AspNetCore.Authentication.JwtBearer** — ASP.NET Core middleware that enables an application to receive an OpenID Connect bearer token. This package was built from the source code at [ASP.NET Core GitHub Repository](https://github.com/dotnet/aspnetcore/tree/c2a442982e736e17ae6bcadbfd8ccba278ee1be6).
+- **Microsoft.AspNetCore.Authentication.JwtBearer** — ASP.NET Core middleware that enables an application to receive an OpenID Connect bearer token. This package was built from the source code at
+
+[ASP.NET Core GitHub Repository](https://github.com/dotnet/aspnetcore/tree/c2a442982e736e17ae6bcadbfd8ccba278ee1be6).
+
 - **MassTransit.RabbitMQ** — MassTransit RabbitMQ transport support. MassTransit provides a developer-focused, modern platform for creating distributed applications without complexity.
 - **Automapper** — A convention-based object-object mapper. 100% organic and gluten-free.
 - **Google.Protobuf** — Protocol Buffers is a method of serializing structured data. It is useful in developing programs to communicate with each other over a wire or for storing data.
 - **Grpc.Tools** — gRPC and Protocol Buffers compiler for managed C# and native C++ projects. Add this package to a project that contains .proto files to be compiled to code.
 - **Grpc.Net.Client** — gRPC C# client library.
+
+### Notifications Service (SignalR)
+
+dotnet new webapi -o src/NotificationService -controllers \
+dotnet sln add .\src\NotificationService\ \
+cd .\src\NotificationService \
+dotnet add reference ../../src/Contracts \
