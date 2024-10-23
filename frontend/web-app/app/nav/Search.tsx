@@ -30,13 +30,8 @@ export default function Search() {
         type='text'
         placeholder='Search for cars by color, model, brand, etc.'
         className='
-        flex-grow 
-        pl-5 
-        bg-transparent 
-        focus:outline-none 
-        border-transparent 
-        focus:border-transparent 
-        focus:ring-0 text-sm
+        input-custom 
+         text-sm
          text-blue-500'
       />
       <button onClick={search}>
