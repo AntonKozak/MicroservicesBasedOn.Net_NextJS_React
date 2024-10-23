@@ -4,7 +4,8 @@ import React from 'react';
 import { placeBidForAuction } from '@/app/actions/auctionActions';
 import { useBidStore } from '@/app/hooks/useBidStore';
 import { FieldValues, useForm } from 'react-hook-form';
-import { numberWithCommas } from '@/app/lib/numberWithComma';
+import { numberWithCommas } from '@/lib/numberWithComma';
+import toast from 'react-hot-toast';
 
 type Props = {
   auctionId: string;
@@ -16,15 +17,28 @@ export default function BidForm({ auctionId, highBid }: Props) {
     register,
     handleSubmit,
     reset,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     formState: { errors },
   } = useForm();
   const addBid = useBidStore((state) => state.addBid);
 
   function onSubmit(data: FieldValues) {
-    placeBidForAuction(auctionId, +data.amount).then((bid) => {
-      addBid(bid);
+    if (data.amount <= highBid) {
       reset();
-    });
+      return toast.error(
+        'Your bid must be higher than the current bid atleast $' +
+          numberWithCommas(highBid + 1)
+      );
+    }
+    placeBidForAuction(auctionId, +data.amount)
+      .then((bid) => {
+        if (bid.error) throw bid.error;
+        addBid(bid);
+        reset();
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   }
 
   return (

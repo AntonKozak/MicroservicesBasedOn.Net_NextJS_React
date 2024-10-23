@@ -8,7 +8,7 @@ import { User } from 'next-auth';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import BidItem from './BidItem';
-import { numberWithCommas } from '@/app/lib/numberWithComma';
+import { numberWithCommas } from '@/lib/numberWithComma';
 import EmptyFilter from '@/app/components/EmptyFilter';
 import BidForm from './BidForm';
 
@@ -22,9 +22,17 @@ export default function BidList({ user, auction }: Props) {
   const [loading, setLoading] = useState(true);
   const bids = useBidStore((state) => state.bids);
   const setBids = useBidStore((state) => state.setBids);
+  const open = useBidStore((state) => state.open);
+  const setOpen = useBidStore((state) => state.setOpen);
+  const openForBids = new Date(auction.auctionEnd) > new Date();
 
   const highBid = bids.reduce(
-    (prev, current) => (prev > current.amount ? prev : current.amount),
+    (prev, current) =>
+      prev > current.amount
+        ? prev
+        : current.bidStatus.includes('Accepted')
+          ? current.amount
+          : prev,
     0
   );
 
@@ -44,6 +52,10 @@ export default function BidList({ user, auction }: Props) {
         setLoading(false);
       });
   }, [auction.id, setBids, setLoading]);
+
+  useEffect(() => {
+    setOpen(openForBids);
+  }, [openForBids, setOpen]);
 
   if (loading) return <div>Loading...</div>;
 
@@ -67,8 +79,22 @@ export default function BidList({ user, auction }: Props) {
           </>
         )}
       </div>
-      <div className='px-2 pb-2 text-gray-800'>
-        <BidForm auctionId={auction.id} highBid={highBid} />
+      <div className='px-2 pb-2 text-gray-500'>
+        {!open ? (
+          <div className='flex items-center justify-center p-2 text-lg font-semibold'>
+            This has auction finished
+          </div>
+        ) : !user ? (
+          <div className='flex items-center justify-center p-2 text-lg font-semibold'>
+            Please login to make a bid
+          </div>
+        ) : user && user.username === auction.seller ? (
+          <div className='flex items-center justify-center p-2 text-lg font-semibold'>
+            You cannot bid on your own auction
+          </div>
+        ) : (
+          <BidForm auctionId={auction.id} highBid={highBid} />
+        )}
       </div>
     </div>
   );

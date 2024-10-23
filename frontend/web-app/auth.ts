@@ -35,7 +35,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return token;
     },
     async session({ session, token }) {
-      console.log('session from auth.tsx', { session, token });
       if (token) {
         session.user.username = token.username;
         session.accessToken = token.accessToken;

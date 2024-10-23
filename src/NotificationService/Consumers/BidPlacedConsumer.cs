@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Contracts;
 using MassTransit;
 using Microsoft.AspNetCore.SignalR;
@@ -13,7 +10,7 @@ public class BidPlacedConsumer(IHubContext<NotificationHub> hubContext) : IConsu
 {
     public async Task Consume(ConsumeContext<BidPlaced> context)
     {
-        Console.WriteLine($"------------->>>>>>>> BidPlacedConsumer: Bid Placed Consumer");
+        Console.WriteLine("==> auction finished message received");
 
         await hubContext.Clients.All.SendAsync("BidPlaced", context.Message);
     }

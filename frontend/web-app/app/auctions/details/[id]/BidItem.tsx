@@ -1,7 +1,7 @@
 import { Bid } from '@/types';
 import React from 'react';
 import { format } from 'date-fns';
-import { numberWithCommas } from '@/app/lib/numberWithComma';
+import { numberWithCommas } from '@/lib/numberWithComma';
 
 type Props = {
   bid: Bid;
@@ -33,15 +33,19 @@ export default function BidItem({ bid }: Props) {
     return { bgColor, text };
   }
 
+  const bidTime = new Date(bid.bidTime);
+
+  const formattedTime = isNaN(bidTime.getTime())
+    ? 'Invalid Date'
+    : format(bidTime, 'dd MMM yyyy h:mm a');
+
   return (
     <div
       className={`border-white text-black border-2 px-3 py-2 rounded-lg flex justify-between items-center mb-2 ${getBidInfo().bgColor}`}
     >
       <div className='flex flex-col'>
         <span>Bidder: {bid.bidder}</span>
-        <span className=' text-sm'>
-          Time: {format(new Date(bid.bidTime), 'dd MM yyyy h:mm a')}
-        </span>
+        <span className='text-sm'>Time: {formattedTime}</span>
       </div>
       <div className='flex flex-col text-right'>
         <div className='text-xl font-semibold'>

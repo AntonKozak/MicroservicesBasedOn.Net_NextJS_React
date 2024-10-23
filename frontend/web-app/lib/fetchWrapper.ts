@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 import { auth } from '@/auth';
 
 const baseUrl = 'http://localhost:6001/';
@@ -51,7 +53,6 @@ async function getHeaders() {
   const session = await auth();
   const headers = {
     'Content-Type': 'application/json',
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as any;
   if (session?.accessToken) {
     headers.Authorization = `Bearer ` + session.accessToken;
@@ -61,12 +62,22 @@ async function getHeaders() {
 
 async function handleResponse(response: Response) {
   const text = await response.text();
-  const data = text && JSON.parse(text);
+  let data;
+
+  try {
+    data = JSON.parse(text);
+  } catch (error) {
+    console.log({ error });
+    data = text;
+  }
 
   if (response.ok) {
     return data || response.statusText;
   } else {
-    const error = { status: response.status, message: response.statusText };
+    const error = {
+      status: response.status,
+      message: typeof data === 'string' ? data : response.statusText,
+    };
     return { error };
   }
 }

@@ -10,7 +10,7 @@ import { useParamsStore } from '../hooks/useParamsStore';
 import { useShallow } from 'zustand/react/shallow';
 import qs from 'query-string';
 import EmptyFilter from '../components/EmptyFilter';
-import { useAuctionStore } from '../hooks/UseAuctionStore';
+import { useAuctionStore } from '../hooks/useAuctionStore';
 
 // Main Listning component
 export default function Listning() {

@@ -1,3 +1,4 @@
+using System;
 using Contracts;
 using MassTransit;
 using Microsoft.AspNetCore.SignalR;
@@ -9,7 +10,7 @@ public class AuctionFinishedConsumer(IHubContext<NotificationHub> hubContext) : 
 {
     public async Task Consume(ConsumeContext<AuctionFinished> context)
     {
-        Console.WriteLine($"------------->>>>>>>> AuctionFinishedConsumer: Auction Finished Consumer");
+        Console.WriteLine("==> auction finished message received");
 
         await hubContext.Clients.All.SendAsync("AuctionFinished", context.Message);
     }

@@ -62,6 +62,7 @@ npm install react-countdown \
 npm install react-hook-form react-datepicker \
 npm i flowbite-react - UI Component Library \
 npm install react-hot-toast \
+npm install @microsoft/signalr
 
 State management solution Zustand [Zustand Demo](https://zustand-demo.pmnd.rs) \
 npm install zustand query-string \
